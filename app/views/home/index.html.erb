@@ -3,11 +3,15 @@
         <% @posts = Post.all.order('created_at DESC')%>
         <% @posts.each do |post| %>
             <div class="polaroid">
-                <%=link_to (image_tag post.image.url, class:'polaroid-img img-responsive'),post_path(post) %>
-                <div class="image-info">
-                    <h5><b><%= post.user.user_name%></b></h5>
-                    <%= post.caption %>
+                 <div class="avatar-icon">
+                	<%= link_to +profile_avatar_select(post.user),profile_path(post.user.user_name)%>
+                	</div>
+                 <div class="image-info">
+                    <h5><b><%= link_to +post.user.user_name,profile_path(post.user.user_name)%></b></h5>
+                    <%= link_to +post.caption,post_path(post)  %>
                 </div>
+                <%=link_to (image_tag post.image.url, class:'polaroid-img img-responsive'),post_path(post) %>
+               
             </div>
         <%end%>
     </div>
